@@ -19,3 +19,5 @@ set -gx WEB_BROWSER google-chrome-stable
 
 
 omf theme bobthefish
+
+alias sl ls
