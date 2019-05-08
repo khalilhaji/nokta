@@ -28,3 +28,6 @@ For Java development I use IntelliJ. I have never seriously configured IntelliJ 
 
 ## VPN
 My `toggle-vpn` script works with the nordvpn Linux command-line interface. I need to come up with a better way to set which server to connect to. It is currently hard-coded to France as I most frequently connect to French servers. When I need to connect to a different server, I do so manually via the command line.
+
+## Screenshots
+![Screenshot of my configuration](screenshots/screenshot1.png)
