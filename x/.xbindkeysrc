@@ -1,0 +1,65 @@
+############################################################
+#              _    _                                      #
+#  _ __   ___ | | _| |_ __ _                               #
+# | '_ \ / _ \| |/ / __/ _` |  _____                       #
+# | | | | (_) |   <| || (_| | |_____|                      #
+# |_| |_|\___/|_|\_\\__\__,_|                              #
+#                                                          #
+#         _     _           _ _                            #
+#   __  _| |__ (_)_ __   __| | | _____ _   _ ___ _ __ ___  #
+#   \ \/ / '_ \| | '_ \ / _` | |/ / _ \ | | / __| '__/ __| #
+#  _ >  <| |_) | | | | | (_| |   <  __/ |_| \__ \ | | (__  #
+# (_)_/\_\_.__/|_|_| |_|\__,_|_|\_\___|\__, |___/_|  \___| #
+#                                      |___/               #
+############################################################
+
+"kitty -1 -e fish"
+  Mod4 + Return
+
+"rofi -show drun"
+  Mod4 + d
+
+"rofi -show window"
+  Mod4 + w
+
+"$WEB_BROWSER"
+  Mod4 + c
+
+"pavucontrol"
+  Mod4 + a
+
+"amixer set Master 5%+"
+  XF86AudioRaiseVolume
+
+"amixer set Master 5%-"
+  XF86AudioLowerVolume
+
+"amixer set Master toggle"
+  XF86AudioMute
+
+"xbacklight +5"
+ XF86MonBrightnessUp
+
+"xbacklight -5"
+  XF86MonBrightnessDown
+
+"playerctl play-pause"
+  XF86AudioPlay 
+
+"playerctl previous"
+  XF86AudioPrev
+
+"playerctl next"
+  XF86AudioNext
+
+"betterlockscreen -l dimblur"
+  Mod4 + Shift + x
+
+"emacs"
+  Mod4 + e
+
+"maim > screenshot.png"
+  Mod4 + Print
+
+"systemctl suspend"
+  Mod4 + Delete
