@@ -1,3 +1,10 @@
+;;              _    _                                                      _
+;;  _ __   ___ | | _| |_ __ _             ___ _ __ ___   __ _  ___ ___   __| |
+;; | '_ \ / _ \| |/ / __/ _` |  _____    / _ \ '_ ` _ \ / _` |/ __/ __| / _` |
+;; | | | | (_) |   <| || (_| | |_____|  |  __/ | | | | | (_| | (__\__ \| (_| |
+;; |_| |_|\___/|_|\_\\__\__,_|         (_)___|_| |_| |_|\__,_|\___|___(_)__,_|
+;;
+
 (require 'package)
 ;; Activate package manager
 (package-initialize)
@@ -35,7 +42,8 @@
 
 ;; Hide toolbar:
 (tool-bar-mode -1)
-
+(menu-bar-mode -1)
+(scroll-bar-mode -1)
 
 ;; y and n mean yes and no
 (fset 'yes-or-no-p 'y-or-n-p)
