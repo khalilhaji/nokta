@@ -24,7 +24,7 @@ primary = #1f22d
 secondary = #FF6200
 alert = #bd2c40
 
-[bar/khalil]
+[bar/nokta]
 ;monitor = ${env:MONITOR:HDMI-1}
 width = 100%
 height = 27
