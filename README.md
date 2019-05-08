@@ -33,3 +33,6 @@ My `toggle-vpn` script works with the nordvpn Linux command-line interface. I ne
 ![screenshot of my configuration](screenshots/screenshot1.png)
 
 ![screenshot of emacs and vim side by side](screenshots/screenshot2.png)
+
+## honorable mention
+I'd like to extend a special thanks to [Kyle Sferrazza](https://kylesferrazza.com/) for [his dotfiles](https://github.com/kylesferrazza/dot) which I used for inspiration when writing mine.
