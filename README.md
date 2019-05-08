@@ -1,5 +1,5 @@
 # nokta
-This is are a collection of my dotfiles.
+This is a collection of my dotfiles.
 Nokta means dot in Turkish.
 
 ## Organization
