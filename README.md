@@ -31,3 +31,5 @@ My `toggle-vpn` script works with the nordvpn Linux command-line interface. I ne
 
 ## screenshots
 ![screenshot of my configuration](screenshots/screenshot1.png)
+
+![screenshot of emacs and vim side by side](screenshots/screenshot2.png)
