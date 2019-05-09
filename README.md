@@ -26,7 +26,7 @@ stow -t ~ vim emacs ...
 
 ## theme
 I tried to use the [gruvbox](https://github.com/morhetz/gruvbox) theme wherever possible. When a gruvbox theme wasn't available, I tried my best to use gruvbox colors.
-I haven't had the time to make a gtk theme that looks good with gruvbox colors but that is on my todo list.
+I created a gtk theme using oomox that uses gruvbox colors. The accent colors are gruvbox green.
 
 ## editors
 I use a combination of vim and emacs in my daily life depending on what I'm doing. I use `evil-mode` in emacs as I find myself to be more productive with vim keybindings.
@@ -40,6 +40,8 @@ My `toggle-vpn` script works with the nordvpn Linux command-line interface. I ne
 ![screenshot of my configuration](screenshots/screenshot1.png)
 
 ![screenshot of emacs and vim side by side](screenshots/screenshot2.png)
+
+![screenshot of my gtk theme in pavucontrol](screenshots/screenshot3.png)
 
 ## honorable mention
 I'd like to extend a special thanks to [Kyle Sferrazza](https://kylesferrazza.com/) for [his dotfiles](https://github.com/kylesferrazza/dot) which I used for inspiration when writing mine.
