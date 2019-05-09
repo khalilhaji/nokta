@@ -14,8 +14,15 @@ To symlink the configuration files into your home directory run:
 ```sh
 git clone https://github.com/khalilhaji/nokta.git 
 cd nokta
+./nokta.sh
+```
+
+Alternatively, if you don't want to install all of the configuration files, you can stow each packge individually like this:
+
+``` sh
 stow -t ~ vim emacs ...
 ```
+
 
 ## theme
 I tried to use the [gruvbox](https://github.com/morhetz/gruvbox) theme wherever possible. When a gruvbox theme wasn't available, I tried my best to use gruvbox colors.
