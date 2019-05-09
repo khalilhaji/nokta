@@ -21,3 +21,7 @@ stow -t ~ \
      rofi \
      vim \
      x
+
+# Export oomox configuration as gtk theme
+oomox-cli $HOME/.config/oomox/colors/Custom/gruvbox --output oomox-gruvbox
+oomoxify-cli -s /opt/spotify/Apps/ $HOME/.config/oomox/colors/Custom/gruvbox
