@@ -16,6 +16,8 @@
 set -gx PATH $HOME/.bin $HOME/.local/bin $PATH
 set -gx EDITOR vim
 set -gx WEB_BROWSER google-chrome-stable
+set -gx GTK_THEME oomox-gruvbox
+set -gx GTK2_RC_FILES $HOME/.themes/oomox-gruvbox/gtk-2.0/gtkrc
 
 
 omf theme bobthefish
