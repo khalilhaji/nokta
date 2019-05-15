@@ -63,3 +63,6 @@
 
 "systemctl suspend"
   Mod4 + Delete
+
+"fix-screen"
+  Mod4 + Insert
