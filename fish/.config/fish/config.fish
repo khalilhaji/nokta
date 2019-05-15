@@ -13,13 +13,16 @@
 #                         |___/                      #
 ######################################################
 
-set -gx PATH $HOME/.bin $HOME/.local/bin $PATH
+set -gx PATH $HOME/.bin $HOME/.local/bin $HOME/.gem/ruby/2.6.0/bin $PATH
 set -gx EDITOR vim
 set -gx WEB_BROWSER google-chrome-stable
 set -gx GTK_THEME oomox-gruvbox
 set -gx GTK2_RC_FILES $HOME/.themes/oomox-gruvbox/gtk-2.0/gtkrc
+set -gx ESHELL /usr/bin/fish
+set -gx SHELL /usr/bin/fish
 
 
 omf theme bobthefish
 
 alias sl ls
+alias emacs "emacs -nw"
