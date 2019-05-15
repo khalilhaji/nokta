@@ -45,6 +45,7 @@ install themes oomox-git
 install fonts ttf-fira-code ttf-fira-mono ttf-fira-sans ttf-font-awesome ttf-dejavu noto-fonts-emoji powerline-fonts-git
 install drivers xf86-video-intel bumblebee
 install audio alsa-utils pulseaudio pavucontrol
+install zip zip unzip
 install music spotify playerctl cava
 install video mpv youtube-dl
 install torrent transmission-cli transmission-gtk
