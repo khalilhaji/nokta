@@ -63,7 +63,7 @@ install torrent transmission-cli transmission-gtk
 install web google-chrome firefox
 install files thunar
 install communication slack-desktop discord riot-desktop
-install editor emacs
+install editor emacs vim
 
 git clone https://aur.archlinux.org/yay.git
 cd yay
