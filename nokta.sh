@@ -37,7 +37,7 @@ install node npm
 install racket racket
 install python python python2 python-virtualenv python-pip python2-pip
 install themes oomox-git
-install fonts ttf-fira-code ttf-fira-mono ttf-fira-sans ttf-font-awesome ttf-dejavu ttf-google-fonts-git noto-fonts-emoji powerline-fonts-git
+install fonts ttf-fira-code ttf-fira-mono ttf-fira-sans ttf-font-awesome ttf-dejavu noto-fonts-emoji powerline-fonts-git
 install drivers xf86-video-intel bumblebee
 install audio alsa-utils pulseaudio pavucontrol
 install music spotify playerctl cava
