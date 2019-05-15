@@ -13,23 +13,6 @@ mkdir -pv "$HOME/Downloads"
 mkdir -pv "$HOME/Documents"
 mkdir -pv "$HOME/.config"
 
-
-stow -t ~ \
-     bin \
-     compton \
-     dunst \
-     emacs \
-     fish \
-     i3 \
-     kitty \
-     oomox \
-     polybar \
-     rofi \
-     vim \
-     x
-
-
-
 sudo pacman -S --needed --noconfirm reflector
 
 sudo reflector --latest 15 --protocol http --protocol https --sort rate --save /etc/pacman.d/mirrorlist
@@ -74,6 +57,21 @@ rm -rf yay
 yay -Sq --needed --noconfirm $PACKAGES
 
 echo 'if [-z \"$BASH_EXECUTION_STRING\" ]; then exec fish; fi' > ~/.bashrc
+
+stow -t ~ \
+     bin \
+     compton \
+     dunst \
+     emacs \
+     fish \
+     i3 \
+     kitty \
+     oomox \
+     polybar \
+     rofi \
+     vim \
+     x
+
 
 # Export oomox configuration as gtk theme
 oomox-cli $HOME/.config/oomox/colors/Custom/gruvbox --output oomox-gruvbox
