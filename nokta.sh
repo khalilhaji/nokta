@@ -73,6 +73,8 @@ rm -rf yay
 
 yay -Sq --needed --noconfirm $PACKAGES
 
+echo 'if [-z \"$BASH_EXECUTION_STRING\" ]; then exec fish; fi' > ~/.bashrc
+
 # Export oomox configuration as gtk theme
 oomox-cli $HOME/.config/oomox/colors/Custom/gruvbox --output oomox-gruvbox
 oomoxify-cli -s /opt/spotify/Apps/ $HOME/.config/oomox/colors/Custom/gruvbox
