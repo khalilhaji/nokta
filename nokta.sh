@@ -30,9 +30,9 @@ stow -t ~ \
 
 
 
-# sudo pacman -S --needed --noconfirm reflector
+sudo pacman -S --needed --noconfirm reflector
 
-# sudo reflector --latest 15 --protocol http --protocol https --sort rate --save /etc/pacman.d/mirrorlist
+sudo reflector --latest 15 --protocol http --protocol https --sort rate --save /etc/pacman.d/mirrorlist
 
 sudo pacman -Syyu --needed --noconfirm base base-devel git stow
 
