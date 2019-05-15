@@ -62,6 +62,8 @@ rm -rf yay
 
 yay -Sq --needed --noconfirm $PACKAGES
 
+curl -L https://get.oh-my.fish | fish
+
 echo 'if [-z \"$BASH_EXECUTION_STRING\" ]; then exec fish; fi' > ~/.bashrc
 
 stow -t ~ \
