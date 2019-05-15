@@ -32,6 +32,11 @@ install vpn nordvpn-bin
 install gui xorg xbindkeys xorg-xinit xdotool xdg-utils
 install wm i3-gaps polybar dunst compton betterlockscreen rofi feh maim
 install rust rustup
+# Necessary for oomox
+rustup install stable
+rustup default stable
+
+
 install java openjdk8-doc openjdk8-src jdk8-openjdk
 install node npm
 install racket racket
