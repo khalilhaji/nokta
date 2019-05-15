@@ -19,6 +19,8 @@
   (evil-leader/set-key "e v" (lambda () (interactive) (find-file "~/.emacs.d/init.el")))
   (evil-leader/set-key "e e" 'find-file)
   (evil-leader/set-key "s v" (lambda () (interactive) (eval-buffer (find-file "~/.emacs.d/init.el"))))
+  (define-key evil-motion-state-map (kbd "/") 'swiper)
+  (define-key evil-motion-state-map (kbd "C-e") 'end-of-line)
   (evil-ex-define-cmd "q" 'kill-this-buffer)
   (evil-ex-define-cmd "Q" 'evil-quit))
 
@@ -26,4 +28,3 @@
   :ensure t
   :config
   (evil-config))
-
