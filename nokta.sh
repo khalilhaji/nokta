@@ -62,9 +62,14 @@ rm -rf yay
 
 yay -Sq --needed --noconfirm $PACKAGES
 
-curl -L https://get.oh-my.fish | fish
+curl -L https://get.oh-my.fish > "$HOME/install"
+chmod +x "$HOME/install"
+fish -c "eval $HOME/install --path=$HOME/.local/share/omf --config=$HOME/.config/omf --noninteractive --yes"
+rm -vf "$HOME/install"
+fish -c "omf install bobthefish"
+fish -c "omf theme bobthefish"
 
-echo 'if [-z \"$BASH_EXECUTION_STRING\" ]; then exec fish; fi' > ~/.bashrc
+echo 'if [-z "$BASH_EXECUTION_STRING" ]; then exec fish; fi' > ~/.bashrc
 
 stow -t ~ \
      bin \

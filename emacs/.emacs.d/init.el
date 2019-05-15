@@ -55,9 +55,9 @@
   :ensure t
   :config (which-key-mode))
 
-;; (use-package counsel
-;;   :ensureP t
-;;   :config (counsel-mode 1))
+(use-package counsel
+  :ensure t
+  :config (counsel-mode 1))
 
 ;; (setq ido-everywhere t)
 ;; (ido-mode 1)
