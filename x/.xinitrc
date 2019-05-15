@@ -69,7 +69,7 @@ get_session(){
 }
 
 # exec $(get_session)
-xinput --set-prop DLL07BE:01\ 06CB:7A13\ Touchpad "libinput Tapping Enabled" 1 \
+xinput --set-prop DLL07BE:01\ 06CB:7A13\ Touchpad "libinput Tapping Enabled" 1 &
 xbindkeys & 
 feh --bg-scale ~/.bg.png &
 nm-applet & 
@@ -80,5 +80,3 @@ amixer set Master 0% &
 amixer set Master mute &
 
 exec i3
-
-
