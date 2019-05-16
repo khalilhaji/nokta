@@ -265,6 +265,8 @@ type = internal/temperature
 thermal-zone = 0
 warn-temperature = 60
 
+hwmon-path = /sys/devices/virtual/hwmon/hwmon2/temp1_input
+
 format = <ramp> <label>
 format-warn = <ramp> <label-warn>
 

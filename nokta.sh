@@ -25,7 +25,7 @@ function install {
 }
 
 
-install system os-prober
+install system os-prober ntp
 install shell kitty fish bash-completion neofetch htop
 install networking networkmanager network-manager-applet curl wget
 install vpn nordvpn-bin
@@ -53,6 +53,8 @@ install web google-chrome firefox
 install files thunar
 install communication slack-desktop discord riot-desktop
 install editor emacs vim
+install power tlp powertop
+install security libu2f-host
 
 git clone https://aur.archlinux.org/yay.git
 cd yay
@@ -84,6 +86,14 @@ stow -t ~ \
      rofi \
      vim \
      x
+
+
+sudo systemctl enable --now NetworkManager
+sudo systemctl enable --now NetworkManager-dispatcher
+sudo systecmtl enable --now ntpd
+sudo systemctl enable --now tlp
+sudo systemctl enable --now nordvpnsd.service
+systemctl --user enable --now nordvpnud
 
 
 # Export oomox configuration as gtk theme
