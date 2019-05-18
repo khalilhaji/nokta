@@ -13,7 +13,7 @@
 #                         |___/                      #
 ######################################################
 
-set -gx PATH $HOME/.bin $HOME/.local/bin $HOME/.gem/ruby/2.6.0/bin $PATH
+set -gx PATH $HOME/.bin $HOME/.local/bin $HOME/.gem/ruby/2.6.0/bin $HOME/.cargo/bin $PATH
 set -gx EDITOR vim
 set -gx WEB_BROWSER google-chrome-stable
 set -gx GTK_THEME oomox-gruvbox
