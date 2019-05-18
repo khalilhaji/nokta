@@ -69,3 +69,6 @@
 
 "fix-screen"
   Mod4 + Insert
+
+"thunar"
+  Mod4 + BackSpace
