@@ -25,6 +25,9 @@
 "$WEB_BROWSER"
   Mod4 + c
 
+"$WEB_BROWSER --incognito"
+  Mod4 + Shift + c
+
 "pavucontrol"
   Mod4 + a
 

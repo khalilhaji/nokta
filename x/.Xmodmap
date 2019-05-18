@@ -1,3 +1,4 @@
+
 !             _    _                
 ! _ __   ___ | | _| |_ __ _         
 !| '_ \ / _ \| |/ / __/ _` |  _____ 
@@ -13,5 +14,8 @@
 !
 
 
-clear Lock
-keycode 66 = Escape NoSymbol Escape
+
+clear lock
+clear control
+keycode 66 = Control_L
+add control = Control_L Control_R
