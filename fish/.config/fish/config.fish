@@ -21,7 +21,6 @@ set -gx GTK2_RC_FILES $HOME/.themes/oomox-gruvbox/gtk-2.0/gtkrc
 set -gx ESHELL /usr/bin/fish
 set -gx SHELL /usr/bin/fish
 
-
 omf theme bobthefish
 
 alias sl ls

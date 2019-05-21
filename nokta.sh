@@ -31,12 +31,7 @@ install networking networkmanager network-manager-applet curl wget
 install vpn nordvpn-bin
 install gui xorg xbindkeys xorg-xinit xdotool xdg-utils
 install wm i3-gaps polybar dunst compton betterlockscreen rofi feh maim
-install rust rustup
-# Necessary for oomox
-rustup install stable
-rustup default stable
-
-
+curl https://sh.rustup.rs -sSf | sh
 install java openjdk8-doc openjdk8-src jdk8-openjdk
 install node npm
 install racket racket
@@ -50,11 +45,11 @@ install music spotify playerctl cava
 install video mpv youtube-dl
 install torrent transmission-cli transmission-gtk
 install web google-chrome firefox
-install files thunar
+install files thunar gvfs gvfs-afc gvfs-goa gvfs-google gvfs-mtp gvfs-smb ntfs-3g thunar-volman
 install communication slack-desktop discord riot-desktop
 install editor emacs vim
 install power tlp powertop
-install security libu2f-host
+install security libu2f-host ufw
 
 git clone https://aur.archlinux.org/yay.git
 cd yay
@@ -89,12 +84,11 @@ stow -t ~ \
 
 
 sudo systemctl enable --now NetworkManager
-sudo systemctl enable --now NetworkManager-dispatcher
 sudo systecmtl enable --now ntpd
 sudo systemctl enable --now tlp
+sudo systemctl enable --now tlp-sleep
 sudo systemctl enable --now nordvpnsd.service
 systemctl --user enable --now nordvpnud
-
 
 # Export oomox configuration as gtk theme
 oomox-cli $HOME/.config/oomox/colors/Custom/gruvbox --output oomox-gruvbox
