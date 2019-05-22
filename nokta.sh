@@ -31,11 +31,13 @@ install networking networkmanager network-manager-applet curl wget
 install vpn nordvpn-bin
 install gui xorg xbindkeys xorg-xinit xdotool xdg-utils
 install wm i3-gaps polybar dunst compton betterlockscreen rofi feh maim
-curl https://sh.rustup.rs -sSf | sh
+
+curl https://sh.rustup.rs -sSf | sh -s -- -y
 install java openjdk8-doc openjdk8-src jdk8-openjdk
 install node npm
 install racket racket
 install python python python2 python-virtualenv python-pip python2-pip
+
 install themes oomox-git
 install fonts ttf-fira-code ttf-fira-mono ttf-fira-sans ttf-font-awesome ttf-dejavu noto-fonts-emoji powerline-fonts-git
 install drivers xf86-video-intel bumblebee
@@ -51,13 +53,21 @@ install editor emacs vim
 install power tlp powertop
 install security libu2f-host ufw
 
-git clone https://aur.archlinux.org/yay.git
-cd yay
-makepkg -si --noconfirm
-cd ..
-rm -rf yay
 
-yay -Sq --needed --noconfirm $PACKAGES
+if [ ! -f /usr/bin/trizen ]; then
+  mkdir -pv "$HOME/tmp"
+  pushd "$HOME/tmp"
+
+  git clone https://aur.archlinux.org/trizen.git
+  pushd trizen
+  yes | makepkg -sri
+  popd
+
+  popd
+  rm -vrf "$HOME/tmp"
+fi
+
+trizen -Sq --needed --noconfirm $PACKAGES
 
 curl -L https://get.oh-my.fish > "$HOME/install"
 chmod +x "$HOME/install"
@@ -66,7 +76,9 @@ rm -vf "$HOME/install"
 fish -c "omf install bobthefish"
 fish -c "omf theme bobthefish"
 
-echo 'if [-z "$BASH_EXECUTION_STRING" ]; then exec fish; fi' > ~/.bashrc
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+
+echo 'if [ -z "$BASH_EXECUTION_STRING" ]; then exec fish; fi' > ~/.bashrc
 
 stow -t ~ \
      bin \
@@ -84,7 +96,7 @@ stow -t ~ \
 
 
 sudo systemctl enable --now NetworkManager
-sudo systecmtl enable --now ntpd
+sudo systemctl enable --now ntpd
 sudo systemctl enable --now tlp
 sudo systemctl enable --now tlp-sleep
 sudo systemctl enable --now nordvpnsd.service
