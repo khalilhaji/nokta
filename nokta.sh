@@ -17,7 +17,7 @@ sudo pacman -S --needed --noconfirm reflector
 
 sudo reflector --latest 15 --protocol http --protocol https --sort rate --save /etc/pacman.d/mirrorlist
 
-sudo pacman -Syyu --needed --noconfirm base base-devel git stow
+sudo pacman -Syyu --needed --noconfirm base base-devel git stow openssh
 
 
 function install {
@@ -66,6 +66,8 @@ if [ ! -f /usr/bin/trizen ]; then
   popd
   rm -vrf "$HOME/tmp"
 fi
+
+gpg --recv-keys A87FF9DF48BF1C90
 
 trizen -Sq --needed --noconfirm $PACKAGES
 
