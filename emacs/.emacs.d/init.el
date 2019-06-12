@@ -39,8 +39,6 @@
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
 
-;; EVIL MODE:
-;; (require 'init-evil)
 (use-package projectile
   :ensure t
   :config
@@ -94,83 +92,94 @@
     (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
     (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)))
 
-  (use-package all-the-icons
-    :ensure t)
+(use-package all-the-icons
+  :ensure t)
 
-  (use-package gruvbox-theme
-    :ensure t
-    :config (load-theme 'gruvbox-dark-medium t))
+(use-package gruvbox-theme
+  :ensure t
+  :config (load-theme 'gruvbox-dark-medium t))
 
-  (use-package racket-mode
-    :ensure t
-    :config (setq racket-program "/usr/bin/racket") ;; <--- Path to racket installation
-    (add-hook 'racket-mode-hook #'racket-unicode-input-method-enable))
+(use-package racket-mode
+  :ensure t
+  :config (setq racket-program "/usr/bin/racket") ;; <--- Path to racket installation
+  (add-hook 'racket-mode-hook #'racket-unicode-input-method-enable))
 
-  (use-package hacker-typer
-    :ensure t)
+(use-package hacker-typer
+  :ensure t)
 
-  (setq org-html-postamble nil)
-  (use-package org-bullets
-    :ensure t
-    :defer t
-    :hook (org-mode . (lambda () (org-bullets-mode 1))))
+(setq org-html-postamble nil)
+(use-package org-bullets
+  :ensure t
+  :defer t
+  :hook (org-mode . (lambda () (org-bullets-mode 1))))
 
-  (use-package smartparens-config
-    :ensure smartparens
-    :config (show-smartparens-global-mode t))
-  (add-hook 'prog-mode-hook 'smartparens-mode)
+(use-package smartparens-config
+  :ensure smartparens
+  :config (show-smartparens-global-mode t))
+(add-hook 'prog-mode-hook 'smartparens-mode)
 
-  ;; Allow undoing
-  (winner-mode 1)
-
-  (defun nuke-all-buffers ()
-    (interactive)
-    (mapcar 'kill-buffer (buffer-list)))
-
-  (bind-key "C-x K" 'nuke-all-buffers)
-
-  ;; Rust setup:
-  ;; Rust mode:
-  (use-package company
-    :ensure t
-    :config
-    (add-hook 'after-init-hook 'global-company-mode))
-
-  (use-package rust-mode
-    :ensure t
-    :config
-    (add-hook 'racer-mode-hook #'company-mode)
-    (define-key rust-mode-map (kbd "TAB") #'company-indent-or-complete-common)
-    (setq company-tooltip-align-annotations t))
-
-  (use-package cargo
-    :ensure t)
-
-  (use-package racer
-    :ensure t
-    :config
-    (add-hook 'rust-mode-hook #'racer-mode)
-    (add-hook 'racer-mode-hook #'eldoc-mode))
-
-  ;; Markdown mode:
-  (use-package markdown-mode
-    :ensure t
-    :commands (markdown-mode gfm-mode)
-    :mode (("README\\.md\\'" . gfm-mode)
-	   ("\\.md\\'" . markdown-mode)
-	   ("\\.markdown\\'" . markdown-mode))
-    :init (setq markdown-command "pandoc"))
+(sp-local-pair 'rust-mode "{" nil :post-handlers '(:add ("||\n[i]" "RET")))
 
 
-  ;; Git stuff:
-  (use-package magit
-    :ensure t
-    :bind (("C-c g" . magit-status)))
+;; Allow undoing
+(winner-mode 1)
 
-  (use-package esup
-    :ensure t)
+(defun nuke-all-buffers ()
+  (interactive)
+  (mapcar 'kill-buffer (buffer-list)))
 
-  
+(bind-key "C-x K" 'nuke-all-buffers)
+
+;; Rust setup:
+;; Rust mode:
+(use-package company
+  :ensure t
+  :config
+  (add-hook 'after-init-hook 'global-company-mode))
+
+(use-package rust-mode
+  :ensure t
+  :config
+  (add-hook 'racer-mode-hook #'company-mode)
+  (define-key rust-mode-map (kbd "TAB") #'company-indent-or-complete-common)
+  (setq company-tooltip-align-annotations t))
+
+(use-package cargo
+  :ensure t)
+
+(use-package racer
+  :ensure t
+  :config
+  (add-hook 'rust-mode-hook #'racer-mode)
+  (add-hook 'racer-mode-hook #'eldoc-mode))
+
+;; Haskell:
+(use-package haskell-mode
+  :ensure t)
+
+;; Markdown mode:
+(use-package markdown-mode
+  :ensure t
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)
+	 ("\\.md\\'" . markdown-mode)
+	 ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command "pandoc"))
+
+
+;; Git stuff:
+(use-package magit
+  :ensure t
+  :bind (("C-c g" . magit-status)))
+
+(use-package esup
+  :ensure t)
+
+
+;; Books
+(use-package nov
+  :ensure t)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -181,8 +190,9 @@
     ("8f97d5ec8a774485296e366fdde6ff5589cf9e319a584b845b6f7fa788c9fa9a" "6d589ac0e52375d311afaa745205abb6ccb3b21f6ba037104d71111e7e76a3fc" "d2e9c7e31e574bf38f4b0fb927aaff20c1e5f92f72001102758005e53d77b8c9" "a22f40b63f9bc0a69ebc8ba4fbc6b452a4e3f84b80590ba0a92b4ff599e53ad0" default)))
  '(package-selected-packages
    (quote
-    (scribble-mode rainbow-delimiters doom-modeline doom-city-lights-brighter-modeline neotree all-the-icons evil-magit evil-leader evil esup magit racer cargo rust-mode company smartparens org-bullets hacker-typer racket-mode gruvbox-theme counsel which-key try projectile use-package))))
-  
+    (haskell-mode nov mu4e-alert mu4e scribble-mode rainbow-delimiters doom-modeline doom-city-lights-brighter-modeline neotree all-the-icons evil-magit evil-leader evil esup magit racer cargo rust-mode company smartparens org-bullets hacker-typer racket-mode gruvbox-theme counsel which-key try projectile use-package)))
+ '(send-mail-function (quote smtpmail-send-it)))
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
