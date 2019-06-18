@@ -46,6 +46,16 @@
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (projectile-global-mode)
   (setq projectile-completion-system 'ivy))
+
+(use-package neotree
+  :ensure t
+  :config
+  (global-set-key [f8] 'neotree-toggle)
+  (setq neo-smart-open t)
+  (setq projectile-switch-project-action 'neotree-projectile-action)
+  (setq-default neo-show-hidden-files t))
+
+
 (use-package try
   :ensure t)
 
@@ -119,6 +129,7 @@
 (add-hook 'prog-mode-hook 'smartparens-mode)
 
 (sp-local-pair 'rust-mode "{" nil :post-handlers '(:add ("||\n[i]" "RET")))
+(sp-local-pair 'js-mode "{" nil :post-handlers '(:add ("||\n[i]" "RET")))
 
 
 ;; Allow undoing
