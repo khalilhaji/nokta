@@ -35,7 +35,6 @@ install wm i3-gaps polybar dunst compton betterlockscreen rofi feh maim
 curl https://sh.rustup.rs -sSf | sh -s -- -y
 install java openjdk8-doc openjdk8-src jdk8-openjdk
 install node npm
-install racket racket
 install python python python2 python-virtualenv python-pip python2-pip
 
 install themes oomox-git
@@ -68,7 +67,9 @@ if [ ! -f /usr/bin/trizen ]; then
 fi
 
 gpg --recv-keys A87FF9DF48BF1C90
+gpg --recv-keys 4773BD5E130D1D45
 
+echo $PACKAGES
 trizen -Sq --needed --noconfirm $PACKAGES
 
 curl -L https://get.oh-my.fish > "$HOME/install"
