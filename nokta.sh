@@ -89,6 +89,7 @@ stow -t ~ \
      dunst \
      emacs \
      fish \
+     gtk \
      i3 \
      kitty \
      oomox \
