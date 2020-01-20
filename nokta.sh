@@ -26,7 +26,7 @@ function install {
 
 
 install system os-prober ntp
-install shell kitty fish bash-completion neofetch htop
+install shell kitty fish bash-completion neofetch htop figlet
 install networking networkmanager network-manager-applet curl wget
 install vpn nordvpn-bin
 install gui xorg xbindkeys xorg-xinit xdotool xdg-utils
