@@ -126,10 +126,10 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 #########
 # Theme #
 #########
-client.focused          #D79921 #D79921 #FFFFFF #FABD2F   #D79921
-client.focused_inactive #333333 #5F676A #FFFFFF #484E50   #5F676A
-client.unfocused        #333333 #222222 #888888 #292D2E   #222222
-client.urgent           #2F343A #CC241D #FFFFFF #CC241D   #cc241d
+client.focused          #24426b #24426b #FFFFFF #24426b   #24426b
+client.focused_inactive #333333 #130f20 #FFFFFF #130f30   #130f20
+client.unfocused        #333333 #222222 #888888 #672e41   #222222
+client.urgent           #cb413e #cb413e #FFFFFF #cb413e   #cb413e
 client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
 
 ########

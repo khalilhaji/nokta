@@ -15,15 +15,12 @@
 ###########################################################################
 
 [colors]
-;background = ${xrdb:color0:#222}
-background = #282828
-background-alt = #3c3836
-;foreground = ${xrdb:color7:#222}
-foreground = #ebdbb2
-foreground-alt = #665c54
-primary = #1f22d
-secondary = #FF6200
-alert = #bd2c40
+background = #130f20
+foreground = #b6bdc5
+foreground-alt = #b6bdc5
+primary = #25b1b7
+secondary = #2d7385
+alert = #cb413e
 
 [bar/nokta]
 ;monitor = ${env:MONITOR:HDMI-1}
@@ -67,9 +64,9 @@ type = internal/fs
 interval = 25
 format-mounted = " <label-mounted> <bar-used>"
 
-bar-used-foreground-0 = #98971a
-bar-used-foreground-1 = #665c54
-bar-used-width = 5
+bar-used-foreground-0 = ${colors.primary}
+bar-used-foreground-1 = ${colors.primary}
+bar-used-width = 10
 bar-used-indicator = |
 bar-used-fill = ─
 bar-used-empty = ─
@@ -157,9 +154,8 @@ label-mode-background = ${colors.primary}
 
 ; focused = Active workspace on focused monitor
 label-focused = %index%
-; label-focused-background = #98971a
-label-focused-background = #98971a
-; label-focused-underline = #ff1ca0
+label-focused-foreground = ${colors.primary}
+label-focused-background = ${colors.background}
 label-focused-padding = 2
 
 ; unfocused = Inactive workspace on any monitor

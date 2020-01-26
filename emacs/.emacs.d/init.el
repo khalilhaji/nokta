@@ -6,50 +6,45 @@
 ;;
 
 (require 'package)
-;; Activate package manager
+;; activate package manager
 (package-initialize)
+
 ;; initialize melpa
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 
+;; install use-package if not already installed
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
 
-
-;; Prevent startup message
+;; prevent startup message
 (setq inhibit-startup-message t)
 
-
-;; Remove title from title bar
+;; remove title from title bar
 ;; (setq frame-title-format nil)
 
-;; Hide toolbar:
+;; hide toolbar
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 
-;; Tabs:
+;; tab width
 (setq default-tab-width 2)
 
 ;; y and n mean yes and no
 (fset 'yes-or-no-p 'y-or-n-p)
-;; Open configuration file.
+
+;; Esc-Esc-c opens config
 (bind-key "ESC ESC c" (lambda () (interactive) (find-file "~/.emacs.d/init.el")))
 
+;; Disable annoying backup files
 (setq backup-directory-alist
       `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
 
-(use-package projectile
-  :ensure t
-  :config
-  (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
-  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-  (projectile-global-mode)
-  (setq projectile-completion-system 'ivy))
-
+;; file manager tree
 (use-package neotree
   :ensure t
   :config
@@ -58,27 +53,19 @@
   (setq projectile-switch-project-action 'neotree-projectile-action)
   (setq-default neo-show-hidden-files t))
 
-
+;; try packages without installing them
 (use-package try
   :ensure t)
 
+;; keybinding suggestions
 (use-package which-key
   :ensure t
   :config (which-key-mode))
 
+;; counsel mode
 (use-package counsel
   :ensure t
   :config (counsel-mode 1))
-
-;; (setq ido-everywhere t)
-;; (ido-mode 1)
-
-;; ;; guesses the context -- see `ffap'
-;; (setq ido-use-filename-at-point 'guess)
-;; ;; more flexible matching...
-;; ;; items that simply contain all chars
-;; ;; in the specified sequence will match
-;; (setq ido-enable-flex-matching t)
 
 (use-package swiper
   :ensure t
@@ -108,13 +95,16 @@
 (use-package all-the-icons
   :ensure t)
 
-(use-package gruvbox-theme
-  :ensure t
-  :config (load-theme 'gruvbox-dark-medium t))
+;; (use-package doom-themes
+;;   :ensure t
+;;   :config
+;;   (setq doom-themes-enable-bold t
+;; 	doom-themes-enable-italic t)
+;;   (load-theme 'doom-one t))
 
 (use-package racket-mode
   :ensure t
-  :config (setq racket-program "/usr/bin/racket") ;; <--- Path to racket installation
+  :config
   (add-hook 'racket-mode-hook #'racket-unicode-input-method-enable))
 
 (use-package hacker-typer
@@ -128,8 +118,8 @@
 
 (use-package smartparens-config
   :ensure smartparens
-  :config (show-smartparens-global-mode t))
-(add-hook 'prog-mode-hook 'smartparens-mode)
+  :config (show-smartparens-global-mode t)
+  (add-hook 'prog-mode-hook 'smartparens-mode))
 
 (sp-local-pair 'rust-mode "{" nil :post-handlers '(:add ("||\n[i]" "RET")))
 (sp-local-pair 'js-mode "{" nil :post-handlers '(:add ("||\n[i]" "RET")))
@@ -144,12 +134,12 @@
 
 (bind-key "C-x K" 'nuke-all-buffers)
 
-;; Rust setup:
-;; Rust mode:
+;; Completion
 (use-package company
   :ensure t
-  :config
-  (add-hook 'after-init-hook 'global-company-mode))
+  :init (global-company-mode 1)
+  :bind (:map company-mode-map ("<C-tab>" . company-complete))
+  :config (add-hook 'after-init-hook 'global-company-mode))
 
 (use-package rust-mode
   :ensure t
@@ -203,10 +193,23 @@
 (use-package esup
   :ensure t)
 
+(use-package yasnippet
+  :ensure t
+  :config (yas-global-mode 1))
+
+(use-package yasnippet-snippets
+  :ensure t)
+
+(use-package solarized-theme
+  :ensure t
+  :config (load-theme 'solarized-dark t))
+
 
 ;; Books
 (use-package nov
   :ensure t)
+
+(global-visual-line-mode t)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -218,7 +221,7 @@
     ("8f97d5ec8a774485296e366fdde6ff5589cf9e319a584b845b6f7fa788c9fa9a" "6d589ac0e52375d311afaa745205abb6ccb3b21f6ba037104d71111e7e76a3fc" "d2e9c7e31e574bf38f4b0fb927aaff20c1e5f92f72001102758005e53d77b8c9" "a22f40b63f9bc0a69ebc8ba4fbc6b452a4e3f84b80590ba0a92b4ff599e53ad0" default)))
  '(package-selected-packages
    (quote
-    (web-mode docker-compose-mode docker dockerfile-mode vue-mode haskell-mode nov mu4e-alert mu4e scribble-mode rainbow-delimiters doom-modeline doom-city-lights-brighter-modeline neotree all-the-icons evil-magit evil-leader evil esup magit racer cargo rust-mode company smartparens org-bullets hacker-typer racket-mode gruvbox-theme counsel which-key try projectile use-package)))
+    (yasnippet-snippets yasnippet doom-themes web-mode docker-compose-mode docker dockerfile-mode vue-mode haskell-mode nov mu4e-alert mu4e scribble-mode rainbow-delimiters doom-modeline doom-city-lights-brighter-modeline neotree all-the-icons evil-magit evil-leader evil esup magit racer cargo rust-mode company smartparens org-bullets hacker-typer racket-mode gruvbox-theme counsel which-key try projectile use-package)))
  '(send-mail-function (quote smtpmail-send-it)))
 
 (custom-set-faces
