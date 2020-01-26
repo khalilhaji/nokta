@@ -36,7 +36,7 @@ foreground = ${colors.foreground}
 line-size = 1
 line-color = #f00
 
-border-size = 4
+border-size = 0
 border-color = #00000000
 
 padding = 0
@@ -166,7 +166,7 @@ label-unfocused-padding = 2
 label-visible = %index%
 label-visible-background = ${self.label-focused-background}
 ; label-visible-underline = ${self.label-focused-underline}
-label-visible-padding = ${self.label-focused-padding}
+# label-visible-padding = ${self.label-focused-padding}
 
 ; urgent = Workspace with urgency hint set
 label-urgent = %index%
