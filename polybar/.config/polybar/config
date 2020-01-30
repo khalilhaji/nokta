@@ -19,7 +19,7 @@ background = #130f20
 foreground = #b6bdc5
 foreground-alt = #b6bdc5
 primary = #25b1b7
-secondary = #2d7385
+secondary = #25b1b7
 alert = #cb413e
 
 [bar/nokta]
@@ -45,7 +45,7 @@ module-margin-left = 1
 module-margin-right = 2
 
 font-0 = "Fira Code:pixelsize=10:bold"
-font-1 = "Font Awesome 5 Free:style=Solid"
+font-1 = "FontAwesome:style=Regular"
 font-2 = "DejaVu Sans"
 
 modules-left = i3
@@ -98,7 +98,7 @@ label-disconnected-foreground = ${colors.foreground-alt}
 ; format-disconnected-underline = ${self.format-connected-underline}
 
 ramp-signal-0 = 
-ramp-signal-foreground = ${colors.foreground}
+ramp-signal-foreground = ${colors.primary}
 
 [module/eth]
 type = internal/network
