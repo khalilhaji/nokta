@@ -8,13 +8,16 @@
 set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
+
+if empty(glob("~/.vim/bundle/Vundle.vim"))
+  !git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+endif
+  
+
 " Vundle Plugins
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'chriskempson/base16-vim'
-Plugin 'joshdick/onedark.vim'
-Plugin 'dracula/vim'
-Plugin 'morhetz/gruvbox'
+Plugin 'altercation/vim-colors-solarized'
 Plugin 'wlangstroth/vim-racket'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
@@ -29,7 +32,7 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 " UI
 set number
 set ruler
-syntax on
+syntax enable
 set colorcolumn=100
 set showcmd
 set wildmenu
@@ -40,12 +43,9 @@ set cursorline
 set encoding=UTF-8
 set scrolloff=5
 
-" gruvbox
-set termguicolors
+" theme
 set background=dark
-hi Normal ctermbg=none
-colorscheme gruvbox
-" let g:airline_extensions=[]
+colorscheme solarized
 let g:airline_powerline_fonts = 1
 
 " Indentation
