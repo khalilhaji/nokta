@@ -50,7 +50,7 @@ xinput --set-prop DLL07BE:01\ 06CB:7A13\ Touchpad "libinput Tapping Enabled" 1 &
 xbindkeys & 
 feh --bg-scale ~/.bg.png &
 nm-applet & 
-compton --config $HOME/.config/compton/compton.conf &
+picom --config $HOME/.config/picom/picom.conf &
 dunst &
 xbacklight -set 40 &
 amixer set Master 0% &
