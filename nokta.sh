@@ -9,6 +9,13 @@
 #                                         #
 ###########################################
 
+
+wget -q --spider google.com
+if [[ ! $? -eq 0 ]]; then 
+  echo "Network offline"
+  exit 1
+fi
+
 mkdir -pv "$HOME/Downloads"
 mkdir -pv "$HOME/Documents"
 mkdir -pv "$HOME/.config"
