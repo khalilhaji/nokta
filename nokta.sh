@@ -10,8 +10,6 @@
 ###########################################
 
 
-mkdir -pv "$HOME/Downloads"
-mkdir -pv "$HOME/Documents"
 mkdir -pv "$HOME/.config"
 
 sudo pacman -S --needed --noconfirm reflector
@@ -38,7 +36,7 @@ install java openjdk8-doc openjdk8-src jdk8-openjdk
 install node npm
 install python python python2 python-virtualenv python-pip python2-pip
 
-install themes arc-gtk-theme
+install themes arc-gtk-theme arc-icon-theme-git
 install fonts ttf-fira-code ttf-fira-mono ttf-fira-sans ttf-font-awesome ttf-dejavu noto-fonts-emoji powerline-fonts-git ttf-ms-win10
 install drivers xf86-video-intel bumblebee bbswitch
 install audio alsa-utils pulseaudio pavucontrol pulseaudio-alsa
@@ -47,7 +45,7 @@ install music spotify playerctl cava
 install video mpv youtube-dl
 install torrent transmission-cli transmission-gtk
 install web google-chrome firefox
-install files thunar gvfs gvfs-afc gvfs-goa gvfs-google gvfs-mtp gvfs-smb ntfs-3g thunar-volman
+install files thunar gvfs gvfs-afc gvfs-goa gvfs-google gvfs-mtp gvfs-smb ntfs-3g thunar-volman xdg-user-dirs
 install communication slack-desktop discord 
 install editor emacs vim 
 install power tlp powertop
@@ -100,5 +98,6 @@ sudo systemctl enable --now tlp
 sudo systemctl enable --now tlp-sleep
 sudo systemctl enable --now nordvpnsd.service
 systemctl --user enable --now nordvpnud
+xdg-user-dirs-update
 
 betterlockscreen -u $HOME/.bg.png
