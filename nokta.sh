@@ -10,7 +10,7 @@
 ###########################################
 
 
-wget -q --spider google.com
+ping -q google.com
 if [[ ! $? -eq 0 ]]; then 
   echo "Network offline"
   exit 1
