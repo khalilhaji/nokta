@@ -16,6 +16,21 @@ if [[ ! $? -eq 0 ]]; then
   exit 1
 fi
 
+timedatectl set-ntp true
+
+ln -sf /usr/share/zoneinfo/America/New_York /etc/localtime
+hwclock --systohc
+echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
+locale-gen
+echo "LANG=en_US.UTF-8" > /etc/locale.conf
+echo ${HOSNAME} > /etc/hostname
+echo "127.0.0.1	localhost
+::1		localhost
+127.0.1.1	${HOSTNAME}.localdomain	${HOSTNAME}" > /etc/hosts
+
+
+
+
 mkdir -pv "$HOME/Downloads"
 mkdir -pv "$HOME/Documents"
 mkdir -pv "$HOME/.config"
