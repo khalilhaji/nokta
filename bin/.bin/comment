@@ -1,4 +1,4 @@
 #!/bin/bash
 
-echo $1 | figlet -f big | boxes -d shell
+echo $1 | figlet | boxes -d shell
 
