@@ -8,8 +8,8 @@
 (require 'package)
 ;; activate package manager
 (package-initialize)
-
-(setq-default cursor-type 'bar)
+(global-display-line-numbers-mode)
+(setq column-number-mode t)
 
 ;; initialize melpa
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
@@ -47,13 +47,55 @@
       `((".*" ,temporary-file-directory t)))
 
 ;; file manager tree
+(use-package all-the-icons
+  :ensure t)
+
+(use-package centaur-tabs
+  :ensure t
+  :demand
+  :config
+  (centaur-tabs-mode t)
+  (setq centaur-tabs-style "bar"
+	centaur-tabs-set-bar 'left
+	centaur-tabs-set-icons t
+	centaur-tabs-gray-out-icons 'buffer
+	centaur-tabs-set-modified-marker t)
+
+  :bind
+  ("C-<prior>" . centaur-tabs-backward)
+  ("C-<next>" . centaur-tabs-forward))
+
 (use-package neotree
   :ensure t
+  :hook (neotree-mode . (lambda () (display-line-numbers-mode 0)))
   :config
-  (global-set-key [f8] 'neotree-toggle)
-  (setq neo-smart-open t)
-  (setq projectile-switch-project-action 'neotree-projectile-action)
-  (setq-default neo-show-hidden-files t))
+  (global-set-key (kbd "<C-M-tab>") 'neotree-toggle)
+  (setq neo-smart-open t
+	projectile-switch-project-action 'neotree-projectile-action
+	neo-theme (if (display-graphic-p) 'icons 'arrow)
+	neo-hide-cursor t
+	projectile-completion-system 'ivy)
+  (setq-default neo-show-hidden-files nil)
+  (add-hook 'after-init-hook 'neotree-startup))
+
+
+
+(use-package projectile
+  :ensure t
+  :config
+  (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  (projectile-mode +1)
+  (setq projectile-switch-project-action 'neotree-projectile-action))
+
+
+(use-package doom-modeline
+  :ensure t
+  :hook (after-init . doom-modeline-mode)
+  :config (setq doom-modeline-height 0)
+  (setq doom-modeline-window-width-limit fill-column)
+  (setq doom-modeline-buffer-modification-icon t))
+
 
 ;; try packages without installing them
 (use-package try
@@ -94,15 +136,13 @@
     (global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
     (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)))
 
-(use-package all-the-icons
-  :ensure t)
 
-;; (use-package doom-themes
-;;   :ensure t
-;;   :config
-;;   (setq doom-themes-enable-bold t
-;; 	doom-themes-enable-italic t)
-;;   (load-theme 'doom-one t))
+(use-package doom-themes
+  :ensure t
+  :config
+  (setq doom-themes-enable-bold t
+	doom-themes-enable-italic t)
+  (load-theme 'doom-solarized-dark t))
 
 (use-package racket-mode
   :ensure t
@@ -206,9 +246,15 @@
 (use-package yasnippet-snippets
   :ensure t)
 
-(use-package solarized-theme
+(use-package emmet-mode
   :ensure t
-  :config (load-theme 'solarized-dark t))
+  :config
+  (add-hook 'sgml-mode-hook 'emmet-mode)
+  (add-hook 'css-mode-hook 'emmet-mode))
+
+;; (use-package solarized-theme
+;;   :ensure t
+;;   :config (load-theme 'solarized-dark t))
 
 
 ;; Books
@@ -217,11 +263,7 @@
 
 
 ;; Set default font
-(set-face-attribute 'default nil
-                    :family "Source Code Pro"
-                    :height 110
-                    :weight 'normal
-                    :width 'normal)
+(set-face-attribute 'default nil :height 110)
 
 
 (custom-set-variables
@@ -229,17 +271,18 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   (quote
-    ("8f97d5ec8a774485296e366fdde6ff5589cf9e319a584b845b6f7fa788c9fa9a" "6d589ac0e52375d311afaa745205abb6ccb3b21f6ba037104d71111e7e76a3fc" "d2e9c7e31e574bf38f4b0fb927aaff20c1e5f92f72001102758005e53d77b8c9" "a22f40b63f9bc0a69ebc8ba4fbc6b452a4e3f84b80590ba0a92b4ff599e53ad0" default)))
  '(package-selected-packages
    (quote
-    (floobits floobits-emacs yasnippet-snippets yasnippet doom-themes web-mode docker-compose-mode docker dockerfile-mode vue-mode haskell-mode nov mu4e-alert mu4e scribble-mode rainbow-delimiters doom-modeline doom-city-lights-brighter-modeline neotree all-the-icons evil-magit evil-leader evil esup magit racer cargo rust-mode company smartparens org-bullets hacker-typer racket-mode gruvbox-theme counsel which-key try projectile use-package)))
- '(send-mail-function (quote smtpmail-send-it)))
-
+    (projectile yasnippet-snippets which-key vue-mode use-package try solarized-theme smartparens smart-mode-line rjsx-mode racket-mode racer org-bullets nov neotree magit julia-mode haskell-mode hacker-typer floobits esup emmet-mode doom-themes doom-modeline dockerfile-mode docker-compose-mode docker counsel company cargo))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+(defun neotree-startup ()
+  (interactive)
+  (neotree-show)
+  (call-interactively 'other-window))
+
