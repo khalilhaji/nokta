@@ -64,6 +64,7 @@ set $ws9 "9"
 set $ws10 "10"
 
 bindsym $mod+1 workspace $ws1
+bindsym $mod+Home workspace $ws1
 bindsym $mod+2 workspace $ws2
 bindsym $mod+3 workspace $ws3
 bindsym $mod+4 workspace $ws4
@@ -73,6 +74,8 @@ bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
 bindsym $mod+0 workspace $ws10
+bindsym $mod+p move workspace to output right
+bindsym $mod+shift+p move workspace to output left
 
 bindsym $mod+Shift+1 move container to workspace $ws1
 bindsym $mod+Shift+2 move container to workspace $ws2
@@ -136,4 +139,5 @@ client.placeholder      #000000 #0C0C0C #FFFFFF #000000   #0C0C0C
 # MISC #
 ########
 popup_during_fullscreen leave_fullscreen
-exec --no-startup-id i3-msg 'workspace 1; exec /usr/bin/emacs'
+exec --no-startup-id i3-msg 'workspace 1; exec /usr/bin/emacs --daemon'
+exec --no-startup-id redshift-gtk
