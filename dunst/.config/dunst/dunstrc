@@ -180,10 +180,10 @@ frame_color = "#8EC07C"
 # Xev might be helpful to find names for keys.
 
 # Close notification.
-close = ctrl+space
+close = mod1+space
 
 # Close all notifications.
-close_all = ctrl+shift+space
+close_all = mod1+shift+space
 
 # Redisplay last message(s).
 # On the US keyboard layout "grave" is normally above TAB and left
