@@ -30,6 +30,7 @@ install networking networkmanager network-manager-applet curl wget
 install vpn nordvpn-bin
 install gui xorg xbindkeys xorg-xinit xdotool xdg-utils
 install wm i3-gaps polybar dunst picom betterlockscreen rofi feh maim
+install screen xrandr arandr autorandr
 
 curl https://sh.rustup.rs -sSf | sh -s -- -y
 install java openjdk8-doc openjdk8-src jdk8-openjdk
@@ -37,7 +38,7 @@ install node npm
 install python python python2 python-virtualenv python-pip python2-pip
 
 install themes arc-gtk-theme arc-icon-theme-git
-install fonts ttf-fira-code ttf-fira-mono ttf-fira-sans ttf-font-awesome ttf-dejavu noto-fonts-emoji powerline-fonts-git ttf-ms-win10
+install fonts ttf-fira-code ttf-fira-mono ttf-fira-sans ttf-font-awesome-4 ttf-dejavu noto-fonts-emoji powerline-fonts-git
 install drivers xf86-video-intel bumblebee bbswitch
 install audio alsa-utils pulseaudio pavucontrol pulseaudio-alsa
 install zip zip unzip
