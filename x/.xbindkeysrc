@@ -13,11 +13,17 @@
 #                                      |___/               #
 ############################################################
 
-"kitty -1 -e zsh"
+"kitty -e zsh"
   Mod4 + Return
 
 "rofi -show drun"
   Mod4 + d
+
+"dnd"
+  Mod4 + m
+
+"deepin-screenshot -f"
+  Print
 
 "rofi -show window"
   Mod4 + w
@@ -58,7 +64,7 @@
 "betterlockscreen -l dimblur"
   Mod4 + Shift + x
 
-"emacs"
+"emacsclient -c"
   Mod4 + e
 
 "maim > screenshot.png"
@@ -72,3 +78,6 @@
 
 "thunar"
   Mod4 + BackSpace
+
+"autorandr -c"
+  Mod4 + x
