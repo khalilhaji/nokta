@@ -45,7 +45,7 @@ module-margin-left = 1
 module-margin-right = 2
 
 font-0 = "Fira Code:pixelsize=10:bold"
-font-1 = "FontAwesome:style=Regular"
+font-1 = "Font Awesome 5 Free:style=Solid"
 font-2 = "DejaVu Sans"
 
 modules-left = i3
@@ -137,7 +137,7 @@ ramp-volume-1 = 
 ramp-volume-2 = 
 
 format-muted = " <label-muted>"
-format-muted-foreground = ${colors.foreground-alt}
+format-muted-foreground = ${colors.foreground}
 
 [module/i3]
 type = internal/i3
@@ -187,7 +187,7 @@ bar-progress-fill = ─
 bar-progress-empty = ─
 exec = playing
 exec-if = playing
-click-left = play-pause
+click-left = playerctl --player=spotify play-pause
 interval = 1
 
 
