@@ -13,7 +13,6 @@ if empty(glob("~/.vim/bundle/Vundle.vim"))
   !git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 endif
   
-
 " Vundle Plugins
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
@@ -24,6 +23,7 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'sjl/gundo.vim'
+Plugin 'fatih/vim-go'
 call vundle#end()
 filetype plugin indent on
 set encoding=utf-8
