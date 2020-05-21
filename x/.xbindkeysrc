@@ -52,7 +52,7 @@
 "xbacklight -5"
   XF86MonBrightnessDown
 
-"playerctl play-pause"
+"play-pause"
   XF86AudioPlay 
 
 "playerctl previous"
