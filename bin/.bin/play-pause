@@ -1,3 +1,10 @@
 #!/bin/bash
 
+pgrep spotify >> /dev/null
+
+if [ $? != 0 ] ; then
+(nohup spotify &)
+sleep 2
+fi
+
 playerctl play-pause
