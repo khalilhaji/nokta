@@ -155,7 +155,7 @@
   :config
   (setq doom-themes-enable-bold t
 				doom-themes-enable-italic t)
-  (load-theme 'doom-solarized-dark t))
+  (load-theme 'doom-gruvbox t))
 
 
 (use-package racket-mode
@@ -230,10 +230,6 @@
   (add-hook 'rust-mode-hook #'racer-mode)
   (add-hook 'racer-mode-hook #'eldoc-mode))
 
-(use-package flycheck
-	:ensure t
-	:init (global-flycheck-mode))
-
 ;; Haskell:
 (use-package haskell-mode
   :ensure t)
@@ -295,15 +291,9 @@
   (add-hook 'sgml-mode-hook 'emmet-mode)
   (add-hook 'css-mode-hook 'emmet-mode))
 
-;; (use-package solarized-theme
-;;   :ensure t
-;;   :config (load-theme 'solarized-gruvbox-dark t))
-
-
 ;; Books
 (use-package nov
   :ensure t)
-
 
 ;; Set default font
 (set-face-attribute 'default nil :height 110)
@@ -318,7 +308,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
 	 (quote
-		(org-pdftools sudo-edit yasnippet-snippets which-key vue-mode use-package try solarized-theme smartparens smart-mode-line rjsx-mode racket-mode racer projectile org-bullets nov neotree magit lsp-ui julia-mode haskell-mode hacker-typer flycheck floobits esup emmet-mode doom-themes doom-modeline dockerfile-mode docker-compose-mode docker counsel company-lsp company-go centaur-tabs cargo))))
+		(org-pdftools sudo-edit yasnippet-snippets which-key vue-mode use-package try smartparens smart-mode-line rjsx-mode racket-mode racer projectile org-bullets nov neotree magit lsp-ui julia-mode haskell-mode hacker-typer floobits esup emmet-mode doom-themes doom-modeline dockerfile-mode docker-compose-mode docker counsel company-lsp company-go centaur-tabs cargo))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

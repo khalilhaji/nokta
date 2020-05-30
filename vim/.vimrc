@@ -16,7 +16,7 @@ endif
 " Vundle Plugins
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'altercation/vim-colors-solarized'
+Plugin 'morhetz/gruvbox'
 Plugin 'wlangstroth/vim-racket'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
@@ -45,7 +45,7 @@ set scrolloff=5
 
 " theme
 set background=dark
-colorscheme solarized
+colorscheme gruvbox
 let g:airline_powerline_fonts = 1
 
 " Indentation
