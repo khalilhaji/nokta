@@ -1,3 +1,4 @@
+test
 # nokta
 This is a collection of my dotfiles.
 Nokta means dot in Turkish.
