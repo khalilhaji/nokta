@@ -1,5 +1,3 @@
-test
-test2
 # nokta
 This is a collection of my dotfiles.
 Nokta means dot in Turkish.
