@@ -205,11 +205,22 @@
 	:hook ((go-mode . lsp-deferred)
 				 (python-mode . lsp-deferred))
 	:commands (lsp lsp-deferred)
-	:config (setq lsp-enable-symbol-highlighting nil))
+	:config
+	(lsp-register-custom-settings
+	 '(("gopls.staticcheck" t t)))
+	(add-hook 'before-save-hook #'lsp-organize-imports)
+	(add-hook 'before-save-hook #'lsp-format-buffer))
+
+(use-package ag
+	:ensure t)
+
+(use-package flycheck
+	:ensure t
+	:init (global-flycheck-mode))
 
 (use-package lsp-ui
 	:ensure t
-	:config (setq lsp-ui-sideline-enable nil
+	:config (setq lsp-ui-sideline-enable t
 								lsp-ui-doc-enable t
 								lsp-ui-imenu-enable t
 								lsp-ui-sideline-ignore-duplicate t))
@@ -238,7 +249,7 @@
 (use-package go-mode
   :ensure t
 	:config
-	(add-hook 'before-save-hook #'gofmt-before-save))
+	(setq gofmt-command "goimports"))
 
 ;; Markdown mode:
 (use-package markdown-mode
@@ -282,8 +293,8 @@
   :ensure t
   :config (yas-global-mode 1))
 
-;; (use-package yasnippet-snippets
-;;   :ensure t)
+(use-package yasnippet-snippets
+  :ensure t)
 
 (use-package emmet-mode
   :ensure t
@@ -308,7 +319,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
 	 (quote
-		(org-pdftools sudo-edit yasnippet-snippets which-key vue-mode use-package try smartparens smart-mode-line rjsx-mode racket-mode racer projectile org-bullets nov neotree magit lsp-ui julia-mode haskell-mode hacker-typer floobits esup emmet-mode doom-themes doom-modeline dockerfile-mode docker-compose-mode docker counsel company-lsp company-go centaur-tabs cargo))))
+		(ag org-pdftools sudo-edit yasnippet-snippets which-key vue-mode use-package try smartparens smart-mode-line rjsx-mode racket-mode racer projectile org-bullets nov neotree magit lsp-ui julia-mode haskell-mode hacker-typer floobits esup emmet-mode doom-themes doom-modeline dockerfile-mode docker-compose-mode docker counsel company-lsp company-go centaur-tabs cargo))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
