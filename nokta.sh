@@ -10,6 +10,9 @@
 ###########################################
 
 
+echo "foweijf"
+
+
 mkdir -pv "$HOME/.config"
 
 sudo pacman -S --needed --noconfirm reflector
