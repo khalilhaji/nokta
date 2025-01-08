@@ -1,0 +1,414 @@
+return {
+  { "ellisonleao/gruvbox.nvim", priority = 1000 , config = true },
+  {
+    "hrsh7th/nvim-cmp",
+    lazy = false,
+    dependencies = {
+      'neovim/nvim-lspconfig',
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-buffer',
+      { 'L3MON4D3/LuaSnip', build = 'make install_jsregexp' },
+      'hrsh7th/cmp-path',
+      'hrsh7th/cmp-cmdline',
+    },
+    config = function()
+      -- Set up nvim-cmp.
+      local cmp = require'cmp'
+      local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+
+      cmp.setup({
+        snippet = {
+          -- REQUIRED - you must specify a snippet engine
+          expand = function(args)
+            require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+          end,
+        },
+        window = {
+          completion = cmp.config.window.bordered(),
+          documentation = cmp.config.window.bordered(),
+        },
+        mapping = cmp.mapping.preset.insert({
+          ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+          ['<C-f>'] = cmp.mapping.scroll_docs(4),
+          ['<M-Space>'] = cmp.mapping.complete(),
+          ['<C-e>'] = cmp.mapping.abort(),
+          ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+        }),
+        sources = cmp.config.sources({
+          { name = 'nvim_lsp' },
+          { name = 'luasnip' }, -- For luasnip users.
+        }, {
+          { name = 'buffer' },
+        })
+      })
+
+      cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
+
+      local luasnip = require "luasnip"
+      luasnip.config.setup {}
+      require("luasnip.loaders.from_vscode").load()
+      require("luasnip.loaders.from_snipmate").load()
+
+      vim.keymap.set({ "i", "s" }, "<C-k>", function()
+        if luasnip.expand_or_jumpable() then
+          luasnip.expand_or_jump()
+        end
+      end, { silent = true })
+
+      vim.keymap.set({ "i", "s" }, "<C-j>", function()
+        if luasnip.jumpable(-1) then
+          luasnip.jump(-1)
+        end
+      end, { silent = true })
+
+      -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+      cmp.setup.cmdline({ '/', '?' }, {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = {
+          { name = 'buffer' }
+        }
+      })
+
+      -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+      cmp.setup.cmdline(':', {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+          { name = 'path' }
+        }, {
+          { name = 'cmdline' }
+        }),
+        matching = { disallow_symbol_nonprefix_matching = false }
+      })
+    end
+  },
+  {
+    "neovim/nvim-lspconfig",
+    lazy = false,
+    version = false,
+    dependencies = {
+      "williamboman/mason.nvim",
+      "williamboman/mason-lspconfig.nvim",
+    },
+    config = function ()
+      require("mason").setup()
+      require("mason-lspconfig").setup()
+      require("mason-lspconfig").setup_handlers {
+        function (server_name)
+          local capabilities = require("cmp_nvim_lsp").default_capabilities()
+          require("lspconfig")[server_name].setup {
+            capabilities = capabilities
+          }
+        end,
+        ["lua_ls"] = function ()
+          require("lspconfig")["lua_ls"].setup {
+            settings = {
+              Lua = {
+                diagnostics = {
+                  globals = { "vim" }
+                }
+              }
+            }
+          }
+        end,
+      }
+
+      vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action)
+      vim.keymap.set('n', '<leader>d', vim.lsp.buf.definition)
+      vim.keymap.set('n', '<leader>u', vim.lsp.buf.references)
+      vim.keymap.set('n', '<leader>rr', vim.lsp.buf.rename)
+    end
+  },
+  {
+    'nvim-lualine/lualine.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons', 'nvim-lua/lsp-status.nvim' },
+    lazy = false,
+    opts = {
+      options = {
+        icons_enabled = true,
+        theme = 'gruvbox',
+        component_separators = { left = '', right = ''},
+        section_separators = { left = '', right = ''},
+        disabled_filetypes = {
+          statusline = {},
+          winbar = {},
+        },
+        ignore_focus = {},
+        always_divide_middle = true,
+        always_show_tabline = true,
+        globalstatus = false,
+        refresh = {
+          statusline = 1000,
+          tabline = 1000,
+          winbar = 1000,
+        }
+      },
+      sections = {
+        lualine_a = {'mode'},
+        lualine_b = {'branch', 'diff', 'diagnostics'},
+        lualine_c = {
+          {
+            'filename',
+            newfile_status = true,
+            path = 3,
+            shorting_target = 20,
+          },
+          "require'lsp-status'.status()"
+        },
+        lualine_x = {'encoding','filetype'},
+        lualine_y = {'progress'},
+        lualine_z = {'location'}
+      },
+      inactive_sections = {
+        lualine_a = {},
+        lualine_b = {},
+        lualine_c = {'filename'},
+        lualine_x = {'location'},
+        lualine_y = {},
+        lualine_z = {}
+      },
+      tabline = {},
+      winbar = {},
+      inactive_winbar = {},
+      extensions = {}
+    }
+  },
+  {
+    "ibhagwan/fzf-lua",
+    -- optional for icon support
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+      -- calling `setup` is optional for customization
+      local fzf = require('fzf-lua')
+      fzf.setup({
+        winopts = {
+          on_create = function()
+            vim.keymap.set("t", "<C-r>", [[<C-\><C-N>pi]])
+          end
+        }
+      })
+
+      fzf.register_ui_select()
+      vim.keymap.set('n', '<leader>ff', fzf.files)
+      vim.keymap.set('n', '<leader>fp', fzf.git_files)
+      vim.keymap.set('n', '<leader>fg', fzf.live_grep_glob)
+      vim.keymap.set('n', '<leader>fb', fzf.buffers)
+      vim.keymap.set('n', '<leader>fh', fzf.helptags)
+      vim.keymap.set('n', '<leader>fo', fzf.oldfiles)
+    end
+  },
+  {
+    "akinsho/bufferline.nvim",
+    config = true,
+  },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    lazy = false,
+    build = ":TSUpdate",
+    opts = {
+      ensure_installed = {
+        "c",
+        "cpp",
+        "css",
+        "html",
+        "go",
+        "gomod",
+        "graphql",
+        "hcl",
+        "javascript",
+        "json",
+        "lua",
+        "markdown",
+        "markdown_inline",
+        "python",
+        "ruby",
+        "rust",
+        "sql",
+        "terraform",
+        "tsx",
+        "typescript",
+        "vim",
+        "vimdoc",
+        "yaml",
+      },
+      auto_install = true,
+      highlight = {
+        enable = true,
+        -- additional_vim_regex_highlighting = { "markdown" },
+      },
+    },
+    config = function(_, opts)
+      require('nvim-treesitter.configs').setup(opts)
+    end
+  },
+  {
+    "romgrk/nvim-treesitter-context",
+    opts = {
+      enable = true,
+    },
+  },
+  {
+    "windwp/nvim-autopairs",
+    opts = {
+      fast_wrap = {},
+    },
+  },
+  {
+    "lewis6991/gitsigns.nvim",
+    opts = {
+      signs = {
+        add          = { text = '┃' },
+        change       = { text = '┃' },
+        delete       = { text = '_' },
+        topdelete    = { text = '‾' },
+        changedelete = { text = '~' },
+        untracked    = { text = '┆' },
+      },
+      signs_staged = {
+        add          = { text = '┃' },
+        change       = { text = '┃' },
+        delete       = { text = '_' },
+        topdelete    = { text = '‾' },
+        changedelete = { text = '~' },
+        untracked    = { text = '┆' },
+      },
+      signs_staged_enable = true,
+      signcolumn = true,  -- Toggle with `:Gitsigns toggle_signs`
+      numhl      = false, -- Toggle with `:Gitsigns toggle_numhl`
+      linehl     = false, -- Toggle with `:Gitsigns toggle_linehl`
+      word_diff  = false, -- Toggle with `:Gitsigns toggle_word_diff`
+      watch_gitdir = {
+        follow_files = true
+      },
+      auto_attach = true,
+      attach_to_untracked = false,
+      current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
+      current_line_blame_opts = {
+        virt_text = true,
+        virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
+        delay = 1000,
+        ignore_whitespace = false,
+        virt_text_priority = 100,
+        use_focus = true,
+      },
+      current_line_blame_formatter = '<author>, <author_time:%R> - <summary>',
+      sign_priority = 6,
+      update_debounce = 100,
+      status_formatter = nil, -- Use default
+      max_file_length = 40000, -- Disable if file is longer than this (in lines)
+      preview_config = {
+        -- Options passed to nvim_open_win
+        border = 'single',
+        style = 'minimal',
+        relative = 'cursor',
+        row = 0,
+        col = 1
+      },
+      on_attach = function(bufnr)
+        local gitsigns = require('gitsigns')
+
+        local function map(mode, l, r, opts)
+          opts = opts or {}
+          opts.buffer = bufnr
+          vim.keymap.set(mode, l, r, opts)
+        end
+        -- Navigation
+        map('n', ']c', function()
+          if vim.wo.diff then
+            vim.cmd.normal({']c', bang = true})
+          else
+            gitsigns.nav_hunk('next')
+          end
+        end)
+
+        map('n', '[c', function()
+          if vim.wo.diff then
+            vim.cmd.normal({'[c', bang = true})
+          else
+            gitsigns.nav_hunk('prev')
+          end
+        end)
+
+        map('n', '<leader>hb', function() gitsigns.blame_line{full=true} end)
+        map('n', '<leader>tb', gitsigns.toggle_current_line_blame)
+        map('n', '<leader>hd', gitsigns.diffthis)
+        map('n', '<leader>hp', gitsigns.preview_hunk_inline)
+        map('n', '<leader>td', gitsigns.toggle_deleted)
+      end
+    }
+  },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    lazy = false,
+    main = "ibl",
+    config = function()
+      local config = require("ibl.config").default_config
+      config.indent.tab_char = config.indent.char
+      config.scope.enabled = false
+      require("ibl").setup(config)
+    end,
+  },
+  "leafgarland/typescript-vim",
+  {
+    "rcarriga/nvim-notify",
+    priority = 1000,
+    config = true,
+  },
+  {
+    "folke/noice.nvim",
+    config = true,
+  },
+  {
+    "folke/trouble.nvim",
+    dependencies = {
+      "ibhagwan/fzf-lua",
+    },
+    cmd = "Trouble",
+    keys = {
+      {
+        "<leader>xx",
+        "<cmd>Trouble diagnostics toggle<cr>",
+        desc = "Diagnostics (Trouble)",
+      },
+      {
+        "<leader>xX",
+        "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+        desc = "Buffer Diagnostics (Trouble)",
+      },
+      {
+        "<leader>cs",
+        "<cmd>Trouble symbols toggle focus=false<cr>",
+        desc = "Symbols (Trouble)",
+      },
+      {
+        "<leader>cl",
+        "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+        desc = "LSP Definitions / references / ... (Trouble)",
+      },
+      {
+        "<leader>xL",
+        "<cmd>Trouble loclist toggle<cr>",
+        desc = "Location List (Trouble)",
+      },
+      {
+        "<leader>xQ",
+        "<cmd>Trouble qflist toggle<cr>",
+        desc = "Quickfix List (Trouble)",
+      },
+    },
+    config = function ()
+      require('trouble').setup()
+      local config = require("fzf-lua.config")
+      local actions = require("trouble.sources.fzf").actions
+      config.defaults.actions.files["ctrl-t"] = actions.open
+
+    end
+  },
+  {
+    "utilyre/barbecue.nvim",
+    dependencies = {
+      "SmiteshP/nvim-navic",
+      "nvim-tree/nvim-web-devicons"
+    },
+    config = true
+  }
+}

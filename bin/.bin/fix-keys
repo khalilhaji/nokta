@@ -1,4 +1,0 @@
-#!/bin/bash
-sleep 2
-
-xmodmap $HOME/.Xmodmap

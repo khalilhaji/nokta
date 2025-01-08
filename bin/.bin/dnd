@@ -1,4 +1,0 @@
-#!/bin/bash
-
-notify-send "DUNST_COMMAND_TOGGLE"
-notify-send "Do Not Disturb OFF"

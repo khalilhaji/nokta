@@ -1,8 +1,0 @@
-#!/bin/bash
-
-STAT=$(playerctl --player=spotify status)
-if test "$STAT" = "Playing" -o "$STAT" = "Paused"; then
-  echo "$(playerctl --player=spotify metadata title) - $(playerctl --player=spotify metadata artist)"
-else
-  exit 1
-fi
