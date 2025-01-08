@@ -1,2 +1,2 @@
 install:
-	stow -t ~ nvim/ tmux/
+	stow -t ~ nvim/ tmux/ ghostty/
