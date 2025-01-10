@@ -1,5 +1,11 @@
 return {
-  { "ellisonleao/gruvbox.nvim", priority = 1000 , config = true },
+  {
+    "ellisonleao/gruvbox.nvim",
+    priority = 1000 ,
+    opts = {
+      transparent_mode = true,
+    },
+  },
   {
     "hrsh7th/nvim-cmp",
     lazy = false,
@@ -7,7 +13,19 @@ return {
       'neovim/nvim-lspconfig',
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-buffer',
-      { 'L3MON4D3/LuaSnip', build = 'make install_jsregexp' },
+      {
+        'L3MON4D3/LuaSnip',
+        build = 'make install_jsregexp',
+        dependencies = {
+          {
+            "rafamadriz/friendly-snippets",
+            config = function()
+              require('luasnip.loaders.from_vscode').lazy_load()
+            end,
+          },
+        },
+      },
+      "saadparwaiz1/cmp_luasnip",
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-cmdline',
     },
@@ -15,6 +33,9 @@ return {
       -- Set up nvim-cmp.
       local cmp = require'cmp'
       local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+      local luasnip = require "luasnip"
+
+      luasnip.config.setup {}
 
       cmp.setup({
         snippet = {
@@ -23,6 +44,7 @@ return {
             require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
           end,
         },
+       preselect = cmp.PreselectMode.None,
         window = {
           completion = cmp.config.window.bordered(),
           documentation = cmp.config.window.bordered(),
@@ -35,8 +57,8 @@ return {
           ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
         }),
         sources = cmp.config.sources({
-          { name = 'nvim_lsp' },
           { name = 'luasnip' }, -- For luasnip users.
+          { name = 'nvim_lsp' },
         }, {
           { name = 'buffer' },
         })
@@ -44,11 +66,7 @@ return {
 
       cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
 
-      local luasnip = require "luasnip"
-      luasnip.config.setup {}
-      require("luasnip.loaders.from_vscode").load()
-      require("luasnip.loaders.from_snipmate").load()
-
+      
       vim.keymap.set({ "i", "s" }, "<C-k>", function()
         if luasnip.expand_or_jumpable() then
           luasnip.expand_or_jump()
@@ -175,7 +193,10 @@ return {
   {
     "ibhagwan/fzf-lua",
     -- optional for icon support
-    dependencies = { "nvim-tree/nvim-web-devicons" },
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+      "nvim-treesitter/nvim-treesitter",
+    },
     config = function()
       -- calling `setup` is optional for customization
       local fzf = require('fzf-lua')
@@ -183,8 +204,11 @@ return {
         winopts = {
           on_create = function()
             vim.keymap.set("t", "<C-r>", [[<C-\><C-N>pi]])
-          end
-        }
+          end,
+        },
+        lsp = {
+          formatter = "path.filename_first",
+        },
       })
 
       fzf.register_ui_select()
@@ -194,6 +218,9 @@ return {
       vim.keymap.set('n', '<leader>fb', fzf.buffers)
       vim.keymap.set('n', '<leader>fh', fzf.helptags)
       vim.keymap.set('n', '<leader>fo', fzf.oldfiles)
+      vim.keymap.set('n', '<leader>fr', fzf.lsp_references)
+      vim.keymap.set('n', '<leader>fs', fzf.lsp_document_symbols)
+      vim.keymap.set('n', '<leader>fd', fzf.diagnostics_workspace)
     end
   },
   {
@@ -238,6 +265,9 @@ return {
     },
     config = function(_, opts)
       require('nvim-treesitter.configs').setup(opts)
+      vim.o.foldmethod = 'expr'
+      vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
+      vim.o.foldlevelstart = 15
     end
   },
   {
@@ -340,18 +370,22 @@ return {
     "lukas-reineke/indent-blankline.nvim",
     lazy = false,
     main = "ibl",
-    config = function()
-      local config = require("ibl.config").default_config
-      config.indent.tab_char = config.indent.char
-      config.scope.enabled = false
-      require("ibl").setup(config)
-    end,
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+    },
+    opts = {
+      scope = {
+        enabled = true
+      }
+    }
   },
   "leafgarland/typescript-vim",
   {
     "rcarriga/nvim-notify",
     priority = 1000,
-    config = true,
+    opts = {
+      background_colour = "#000000"
+    },
   },
   {
     "folke/noice.nvim",
@@ -410,5 +444,9 @@ return {
       "nvim-tree/nvim-web-devicons"
     },
     config = true
-  }
+  },
+  {
+    "folke/which-key.nvim",
+    config = true,
+  },
 }

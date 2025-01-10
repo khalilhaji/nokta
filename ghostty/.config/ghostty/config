@@ -1,0 +1,17 @@
+font-family = FiraCode Nerd Font
+theme = GruvboxDark
+mouse-hide-while-typing=true
+
+# usize max value
+# https://github.com/ghostty-org/ghostty/blob/12ce9f2e3b19cf1810746dcfe5b19f173004e256/src/config/Config.zig#L743
+# https://doc.rust-lang.org/std/usize/constant.MAX.html
+scrollback-limit=18446744073709551615
+
+background-opacity = 0.95
+background-blur-radius = 20
+
+macos-titlebar-style = transparent
+macos-icon = custom-style
+macos-icon-frame = beige
+macos-icon-ghost-color = white
+macos-icon-screen-color = purple
