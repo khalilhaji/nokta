@@ -1,10 +1,8 @@
 return {
   {
     "ellisonleao/gruvbox.nvim",
-    priority = 1000 ,
-    opts = {
-      transparent_mode = true,
-    },
+    priority = 1000,
+    config = true,
   },
   {
     "hrsh7th/nvim-cmp",
@@ -221,6 +219,7 @@ return {
       vim.keymap.set('n', '<leader>fr', fzf.lsp_references)
       vim.keymap.set('n', '<leader>fs', fzf.lsp_document_symbols)
       vim.keymap.set('n', '<leader>fd', fzf.diagnostics_workspace)
+      vim.keymap.set('n', '<leader>fq', fzf.quickfix)
     end
   },
   {
@@ -379,7 +378,6 @@ return {
       }
     }
   },
-  "leafgarland/typescript-vim",
   {
     "rcarriga/nvim-notify",
     priority = 1000,
@@ -390,52 +388,6 @@ return {
   {
     "folke/noice.nvim",
     config = true,
-  },
-  {
-    "folke/trouble.nvim",
-    dependencies = {
-      "ibhagwan/fzf-lua",
-    },
-    cmd = "Trouble",
-    keys = {
-      {
-        "<leader>xx",
-        "<cmd>Trouble diagnostics toggle<cr>",
-        desc = "Diagnostics (Trouble)",
-      },
-      {
-        "<leader>xX",
-        "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-        desc = "Buffer Diagnostics (Trouble)",
-      },
-      {
-        "<leader>cs",
-        "<cmd>Trouble symbols toggle focus=false<cr>",
-        desc = "Symbols (Trouble)",
-      },
-      {
-        "<leader>cl",
-        "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
-        desc = "LSP Definitions / references / ... (Trouble)",
-      },
-      {
-        "<leader>xL",
-        "<cmd>Trouble loclist toggle<cr>",
-        desc = "Location List (Trouble)",
-      },
-      {
-        "<leader>xQ",
-        "<cmd>Trouble qflist toggle<cr>",
-        desc = "Quickfix List (Trouble)",
-      },
-    },
-    config = function ()
-      require('trouble').setup()
-      local config = require("fzf-lua.config")
-      local actions = require("trouble.sources.fzf").actions
-      config.defaults.actions.files["ctrl-t"] = actions.open
-
-    end
   },
   {
     "utilyre/barbecue.nvim",
@@ -449,4 +401,5 @@ return {
     "folke/which-key.nvim",
     config = true,
   },
+  "leafgarland/typescript-vim"
 }
