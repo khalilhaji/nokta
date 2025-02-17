@@ -1,0 +1,18 @@
+#!/bin/bash
+
+if [ -z "$(git status)" ]; then
+  exit
+fi
+
+if git status | grep -q "working tree clean"; then
+  echo "no changes to save"
+  exit
+fi
+
+if git status | grep -q "On branch master"; then
+  echo "don't commit to master!!!"
+  exit
+fi
+
+git add .
+git commit -m 'wip'

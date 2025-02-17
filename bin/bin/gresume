@@ -1,0 +1,16 @@
+#!/bin/bash
+
+if [ -z "$(git status)" ]; then
+  exit
+fi
+
+SELF_COMMIT="$(git show | grep "Author: Khalil Haji")"
+WIP_COMMIT="$(git show | grep wip)"
+
+if [ -n "$SELF_COMMIT" ] && [ -n "$WIP_COMMIT" ]; then
+  git reset --soft HEAD~1
+  git restore --staged .
+else
+  echo "Last commit was not a wip"
+fi
+

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+SESSION="dev"
+
+SESSIONEXISTS=$(tmux list-sessions | grep $SESSION)
+
+if [ "$SESSIONEXISTS" = "" ]; then
+  tmux new-session -d -s "dev"
+fi
+
+tmux attach-session -t "dev"
+
