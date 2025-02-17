@@ -199,6 +199,7 @@ return {
       -- calling `setup` is optional for customization
       local fzf = require('fzf-lua')
       fzf.setup({
+        "telescope",
         winopts = {
           on_create = function()
             vim.keymap.set("t", "<C-r>", [[<C-\><C-N>pi]])
@@ -217,7 +218,7 @@ return {
       vim.keymap.set('n', '<leader>fh', fzf.helptags)
       vim.keymap.set('n', '<leader>fo', fzf.oldfiles)
       vim.keymap.set('n', '<leader>fr', fzf.lsp_references)
-      vim.keymap.set('n', '<leader>fs', fzf.lsp_document_symbols)
+      vim.keymap.set('n', '<leader>fs', fzf.lsp_workspace_symbols)
       vim.keymap.set('n', '<leader>fd', fzf.diagnostics_workspace)
       vim.keymap.set('n', '<leader>fq', fzf.quickfix)
     end
